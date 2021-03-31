@@ -1,0 +1,23 @@
+{
+  "app_title":"Chào mấy cưng",
+  "msg":"{} đã được viết bằng ngôn ngữ {}",
+  "msg_named":"Easy localization đã được viết bằng ngôn ngữ {lang}",
+  "msg_mixed":"{} đã được viết bằng ngôn ngữ {lang}",
+  "gender":{
+    "male":"Chào cưng ;) {}",
+    "female":"Chào bé :) {}",
+    "other":"Chào {}"
+  },
+  "money_args": {
+    "zero": "{} hông có tiền",
+    "one": "{} có {}USD",
+    "many": "{} có nhiều lắm, {}USD",
+    "other": "{} có nhiều lắm, {}USD"
+  },
+  "login": "Đăng nhập",
+  "username": "Tên đăng nhập",
+  "password": "Mật khẩu",
+  "login_successful": "Đăng nhập thành công",
+  "login_failed": "Đăng nhập thất bại",
+  "welcome_msg": "Chào mừng {} gia nhập hội kín"
+}

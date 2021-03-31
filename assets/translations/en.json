@@ -1,0 +1,23 @@
+{
+  "app_title":"Hello guys",
+  "msg":"{} 111are written in the {} language",
+  "msg_named":"Easy localization are written in the {lang} language",
+  "msg_mixed":"{} are written in the {lang} language",
+  "gender":{
+    "male":"Hi man ;) {}",
+    "female":"Hello girl :) {}",
+    "other":"Hello {}"
+  },
+  "money_args": {
+    "zero": "{} has no money",
+    "one": "{} has {} dollar",
+    "many": "{} has {} dollars",
+    "other": "{} has {} dollars"
+  },
+  "login": "Login",
+  "username": "Account",
+  "password": "Password",
+  "login_successful": "Login Successful",
+  "login_failed": "Login Failed",
+  "welcome_msg": "Welcome {} join closed society"
+}
