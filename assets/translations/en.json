@@ -1,12 +1,12 @@
 {
-  "app_title":"Hello guys",
-  "msg":"{} 111are written in the {} language",
-  "msg_named":"Easy localization are written in the {lang} language",
-  "msg_mixed":"{} are written in the {lang} language",
-  "gender":{
-    "male":"Hi man ;) {}",
-    "female":"Hello girl :) {}",
-    "other":"Hello {}"
+  "app_title": "Hello guys",
+  "msg": "{} 111are written in the {} language",
+  "msg_named": "Easy localization are written in the {lang} language",
+  "msg_mixed": "{} are written in the {lang} language",
+  "gender": {
+    "male": "Hi man ;) {}",
+    "female": "Hello girl :) {}",
+    "other": "Hello {}"
   },
   "money_args": {
     "zero": "{} has no money",
@@ -26,5 +26,14 @@
   "tab_books": "Books",
   "search": "Search",
   "receive": "Receive",
-  "change": "Change"
+  "change": "Change",
+  "login_now": "Login now",
+  "login_tooltip": "to follow good stories!",
+  "list_comic": "List of comic",
+  "list_novel": "List of novel",
+  "my_club": "My club",
+  "common_question": "common question",
+  "rate_this_app": "Rate this app",
+  "legacy": "Legacy",
+  "feed_back": "Feedback"
 }

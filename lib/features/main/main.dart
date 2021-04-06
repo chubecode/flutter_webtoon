@@ -6,6 +6,7 @@ import 'package:flutter_webtoon/features/home/home.dart';
 import 'package:flutter_webtoon/features/main/bloc/main_bloc.dart';
 import 'package:flutter_webtoon/features/main/custom_appbar.dart';
 import 'package:flutter_webtoon/features/main/custom_bottom_bar.dart';
+import 'package:flutter_webtoon/features/main/custom_drawer.dart';
 
 class MainScreen extends StatelessWidget {
   static final screenName = "/";
@@ -14,6 +15,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
+        var drawerWidth = MediaQuery.of(context).size.width * 0.9;
         return BlocListener<MainStateBloc, MainState>(
           listener: (context, MainState state) {
             _listenBlocChange(state, context);
@@ -35,6 +37,7 @@ class MainScreen extends StatelessWidget {
             appBar: MyCustomAppBar(
               height: 100,
             ),
+            drawer: DrawerLayout(drawerWidth: drawerWidth),
           ),
         );
       },
@@ -64,7 +67,7 @@ class MainScreen extends StatelessWidget {
   }
 
   Widget _renderBottomBarChange(UserChangeTab state, BuildContext context) {
-    return BottomBar(state: state,context: context);
+    return BottomBar(state: state, context: context);
   }
 }
 
