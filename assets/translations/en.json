@@ -19,5 +19,12 @@
   "password": "Password",
   "login_successful": "Login Successful",
   "login_failed": "Login Failed",
-  "welcome_msg": "Welcome {} join closed society"
+  "welcome_msg": "Welcome {} join closed society",
+  "tab_news": "New feed",
+  "tab_comic": "Comic",
+  "tab_novel": "Novel",
+  "tab_books": "Books",
+  "search": "Search",
+  "receive": "Receive",
+  "change": "Change"
 }

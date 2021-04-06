@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 
 import 'common/appTheme.dart';
 import 'domain/usecase/check_user_state_usecase.dart';
-import 'features/main/bloc/user_state_bloc.dart';
+import 'features/main/bloc/main_bloc.dart';
 import 'generated/codegen_loader.g.dart';
 import 'generated/locale_keys.g.dart';
 
@@ -39,8 +39,8 @@ void _initGetItDi() {
 class StartApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserStateBloc>(
-      create: (BuildContext context) => UserStateBloc()..add(InitEvent()),
+    return BlocProvider<MainStateBloc>(
+      create: (BuildContext context) => MainStateBloc()..add(InitEvent()),
       child: MaterialApp(
         title: LocaleKeys.app_title.tr(),
         localizationsDelegates: context.localizationDelegates,

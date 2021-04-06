@@ -19,5 +19,12 @@
   "password": "Mật khẩu",
   "login_successful": "Đăng nhập thành công",
   "login_failed": "Đăng nhập thất bại",
-  "welcome_msg": "Chào mừng {} gia nhập hội kín"
+  "welcome_msg": "Chào mừng {} gia nhập hội kín",
+  "tab_news": "Bảng tin",
+  "tab_comic": "Truyện tranh",
+  "tab_novel": "Tiểu thuyết",
+  "tab_books": "Giá sách",
+  "search": "Tìm kiếm",
+  "receive": "Nhận",
+  "change": "Thay đổi"
 }

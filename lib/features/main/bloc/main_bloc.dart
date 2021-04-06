@@ -8,18 +8,18 @@ import 'package:flutter_webtoon/domain/usecase/check_user_state_usecase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
-part 'user_state_event.dart';
+part 'main_event.dart';
 
-part 'user_state_state.dart';
+part 'main_state.dart';
 
-class UserStateBloc extends Bloc<UserStateEvent, UserStateState> {
+class MainStateBloc extends Bloc<MainStateEvent, MainState> {
   CheckUserStateUseCase _getUserStateUseCase = GetIt.instance.get();
 
-  UserStateBloc() : super(UserStateInitial());
+  MainStateBloc() : super(UserStateInitial());
 
   @override
-  Stream<UserStateState> mapEventToState(
-    UserStateEvent event,
+  Stream<MainState> mapEventToState(
+    MainStateEvent event,
   ) async* {
     if (event is InitEvent) {
       yield* handleEventInit();
@@ -33,10 +33,12 @@ class UserStateBloc extends Bloc<UserStateEvent, UserStateState> {
       );
     } else if (event is LogoutEvent) {
       yield UserStateNotYetLogin();
+    } else if (event is ChangeTabEvent) {
+      yield UserChangeTab(event.index);
     }
   }
 
-  Stream<UserStateState> handleEventInit() async* {
+  Stream<MainState> handleEventInit() async* {
     Either<Error, UserStateEntity> state =
         await _getUserStateUseCase.execute(EmptyInput());
     if (state.isSuccess) {

@@ -3,8 +3,9 @@ import 'package:dart_extensions/dart_extensions.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
-
-  const TextFieldContainer({Key? key, required this.child}) : super(key: key);
+  final Color borderColor;
+  final Color backgroundColor;
+  const TextFieldContainer({Key? key, required this.child, this.borderColor = Colors.white, this.backgroundColor = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,8 @@ class TextFieldContainer extends StatelessWidget {
       width: size.width * 0.8,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroundColor,
+        border: Border.all(color: borderColor),
         borderRadius: BorderRadius.circular(29),
       ),
       child: child,

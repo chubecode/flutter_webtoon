@@ -1,14 +1,11 @@
+import 'package:dart_extensions/dart_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webtoon/common/common_widgets.dart';
-import 'package:flutter_webtoon/common/components/background.dart';
-import 'package:flutter_webtoon/common/components/language_field.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_webtoon/features/main/bloc/user_state_bloc.dart';
-import 'package:dart_extensions/dart_extensions.dart';
-import 'package:flutter_webtoon/generated/locale_keys.g.dart';
-
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_webtoon/features/home/home.dart';
+import 'package:flutter_webtoon/features/main/bloc/main_bloc.dart';
+import 'package:flutter_webtoon/features/main/custom_appbar.dart';
+import 'package:flutter_webtoon/features/main/custom_bottom_bar.dart';
 
 class MainScreen extends StatelessWidget {
   static final screenName = "/";
@@ -17,15 +14,26 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        return BlocListener<UserStateBloc, UserStateState>(
-          listener: (context, UserStateState state) {
+        return BlocListener<MainStateBloc, MainState>(
+          listener: (context, MainState state) {
             _listenBlocChange(state, context);
           },
           child: Scaffold(
-            body: BlocBuilder<UserStateBloc, UserStateState>(
-              builder: (BuildContext context, UserStateState state) {
-                return _renderBlocChange(state,context);
+            body: BlocBuilder<MainStateBloc, MainState>(
+              builder: (BuildContext context, MainState state) {
+                return _renderBlocChange(state, context);
               },
+            ),
+            bottomNavigationBar: BlocBuilder<MainStateBloc, MainState>(
+              builder: (BuildContext context, MainState state) {
+                if (state is UserChangeTab) {
+                  return _renderBottomBarChange(state, context);
+                } else
+                  return _renderBottomBarChange(UserChangeTab(0), context);
+              },
+            ),
+            appBar: MyCustomAppBar(
+              height: 100,
             ),
           ),
         );
@@ -33,31 +41,30 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  void _listenBlocChange(UserStateState state, BuildContext context) {
+  void _listenBlocChange(MainState state, BuildContext context) {
     if (state is UserStateNotYetLogin) {
       Navigator.of(context)
           .popUntil(ModalRoute.withName(MainScreen.screenName));
     }
   }
 
-  StatelessWidget _renderBlocChange(UserStateState state, BuildContext context) {
+  StatelessWidget _renderBlocChange(MainState state, BuildContext context) {
     if (state is UserStateInitial) {
       return Container(color: Colors.white, child: loadingWidget());
     } else if (state is UserStateLoginSuccess) {
-      return Background(
-        child: Column(
-          children: <Widget> [
-            Text(LocaleKeys.login_successful).tr().toCenter(),
-            Text(LocaleKeys.welcome_msg).tr(args: [state.name]).toCenter(),
-            LanguageField(),
-          ],
-        ).paddingOnly(top: 300),
-      );
-    } else {
+      return HomeScreen();
+    } else if (state is UserChangeTab) {
       return Container(
         color: Colors.white,
-        child:  Text(LocaleKeys.login_failed).tr().toCenter()
+        child: Text('Tab ${state.index}').toCenter(),
       );
+    } else {
+      return HomeScreen();
     }
   }
+
+  Widget _renderBottomBarChange(UserChangeTab state, BuildContext context) {
+    return BottomBar(state: state,context: context);
+  }
 }
+
