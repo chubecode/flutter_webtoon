@@ -16,28 +16,39 @@ class MainScreen extends StatelessWidget {
     return Builder(
       builder: (context) {
         var drawerWidth = MediaQuery.of(context).size.width * 0.9;
+        GlobalKey<ScaffoldState> _mainKey = GlobalKey();
         return BlocListener<MainStateBloc, MainState>(
           listener: (context, MainState state) {
             _listenBlocChange(state, context);
           },
-          child: Scaffold(
-            body: BlocBuilder<MainStateBloc, MainState>(
-              builder: (BuildContext context, MainState state) {
-                return _renderBlocChange(state, context);
-              },
+          child: SafeArea(
+            child: Scaffold(
+              key: _mainKey,
+              body: Column(
+                children: [
+                  MyCustomAppBar(
+                    onDrawerTap: ()=>{
+                      _mainKey.currentState!.openDrawer()
+                    },
+                    height: 100,
+                  ),
+                  BlocBuilder<MainStateBloc, MainState>(
+                    builder: (BuildContext context, MainState state) {
+                      return _renderBlocChange(state, context);
+                    },
+                  ),
+                ],
+              ),
+              bottomNavigationBar: BlocBuilder<MainStateBloc, MainState>(
+                builder: (BuildContext context, MainState state) {
+                  if (state is UserChangeTab) {
+                    return _renderBottomBarChange(state, context);
+                  } else
+                    return _renderBottomBarChange(UserChangeTab(0), context);
+                },
+              ),
+              drawer: DrawerLayout(drawerWidth: drawerWidth),
             ),
-            bottomNavigationBar: BlocBuilder<MainStateBloc, MainState>(
-              builder: (BuildContext context, MainState state) {
-                if (state is UserChangeTab) {
-                  return _renderBottomBarChange(state, context);
-                } else
-                  return _renderBottomBarChange(UserChangeTab(0), context);
-              },
-            ),
-            appBar: MyCustomAppBar(
-              height: 100,
-            ),
-            drawer: DrawerLayout(drawerWidth: drawerWidth),
           ),
         );
       },

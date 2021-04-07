@@ -1,4 +1,5 @@
 import 'package:dart_extensions/dart_extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'text_field_container.dart';

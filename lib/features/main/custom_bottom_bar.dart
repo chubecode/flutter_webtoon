@@ -37,7 +37,7 @@ class BottomBar extends StatelessWidget {
         ),
       ],
       currentIndex: state.index,
-      selectedItemColor: Colors.amber[800],
+      selectedItemColor: Colors.green,
       onTap: (int index) =>
       {BlocProvider.of<MainStateBloc>(context).add(ChangeTabEvent(index))},
     );

@@ -6,50 +6,60 @@ import 'package:dart_extensions/dart_extensions.dart';
 
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
-
+  final Function()? onDrawerTap;
   const MyCustomAppBar({
     Key? key,
     required this.height,
+    required this.onDrawerTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          child: AppBar(
-            backgroundColor: Colors.white,
-            title: Container(
-              width: double.infinity,
-              height: 86,
-              child: RoundedInputField(
-                onChanged: (String value) {},
-                hintText: LocaleKeys.search.tr(),
-                icon: Icons.search,
-                borderColor: Colors.grey,
-              ).paddingOnly(top: 10,bottom: 10),
+    return Container(
+      color: Colors.green ,
+      height: 60,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
             ),
-            actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.notifications_active,
-                  color: Colors.green,
-                ),
-                onPressed: () => {},
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.monetization_on_sharp,
-                  color: Colors.amber,
-                ),
-                onPressed: () => {},
-              ),
-            ],
+            onPressed: onDrawerTap,
           ),
-        ),
-      ],
-    ).paddingOnly(top: 10, bottom: 10);
+          Container(
+            width: 160,
+            child: RoundedInputField(
+              onChanged: (String value) {},
+              hintText: LocaleKeys.search.tr(),
+              icon: Icons.search,
+              borderColor: Colors.grey,
+            ).toCenter().paddingAll(2),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.notifications_active,
+              color: Colors.white,
+            ),
+            onPressed: () => {},
+          ),
+          Container(
+            width: 80,
+            decoration:  BoxDecoration(
+              color: Colors.yellow,
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(29),
+            ),
+            child: Text(
+              "\u{1F4B0} "+
+                  LocaleKeys.receive.tr(),
+              style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+            ).paddingAll(5),
+          ).paddingAll(10),
+        ],
+      ),
+    );
   }
 
   @override
