@@ -4,7 +4,7 @@ import 'package:flutter_webtoon/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:dart_extensions/dart_extensions.dart';
 
-class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MyCustomAppBar extends StatelessWidget {
   final double height;
   final Function()? onDrawerTap;
   const MyCustomAppBar({
@@ -17,7 +17,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.green ,
-      height: 60,
+      height: height,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -62,6 +62,4 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  @override
-  Size get preferredSize => Size.fromHeight(height);
 }

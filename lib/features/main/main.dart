@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
                     onDrawerTap: ()=>{
                       _mainKey.currentState!.openDrawer()
                     },
-                    height: 100,
+                    height: 60,
                   ),
                   BlocBuilder<MainStateBloc, MainState>(
                     builder: (BuildContext context, MainState state) {
