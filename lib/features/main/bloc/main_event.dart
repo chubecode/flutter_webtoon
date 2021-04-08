@@ -1,14 +1,24 @@
-part of 'user_state_bloc.dart';
+part of 'main_bloc.dart';
 
 @immutable
-abstract class UserStateState {}
-
-class UserStateInitial extends UserStateState {}
-
-class UserStateNotYetLogin extends UserStateState {}
+abstract class MainStateEvent {}
 
 @immutable
-class UserStateLoginSuccess extends UserStateState {
+class InitEvent extends MainStateEvent {}
+
+@immutable
+class LogoutEvent extends MainStateEvent {}
+
+@immutable
+class ChangeTabEvent extends MainStateEvent {
+  final int index;
+
+  ChangeTabEvent(this.index);
+
+}
+
+@immutable
+class LoginEvent extends MainStateEvent {
   final String id;
   final String token;
   final String name;
@@ -16,14 +26,14 @@ class UserStateLoginSuccess extends UserStateState {
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
-  UserStateLoginSuccess({
+  LoginEvent({
     required this.id,
     required this.token,
     required this.name,
     required this.langId,
-  }) : super();
+  }): super();
 
-  UserStateLoginSuccess copyWith({
+  LoginEvent copyWith({
     String? id,
     String? token,
     String? name,
@@ -36,7 +46,7 @@ class UserStateLoginSuccess extends UserStateState {
       return this;
     }
 
-    return new UserStateLoginSuccess(
+    return new LoginEvent(
       id: id ?? this.id,
       token: token ?? this.token,
       name: name ?? this.name,
@@ -46,13 +56,13 @@ class UserStateLoginSuccess extends UserStateState {
 
   @override
   String toString() {
-    return 'UserStateLoginSuccess{id: $id, token: $token, name: $name, langId: $langId}';
+    return 'LoginEvent{id: $id, token: $token, name: $name, langId: $langId}';
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is UserStateLoginSuccess &&
+      (other is LoginEvent &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           token == other.token &&
@@ -63,8 +73,8 @@ class UserStateLoginSuccess extends UserStateState {
   int get hashCode =>
       id.hashCode ^ token.hashCode ^ name.hashCode ^ langId.hashCode;
 
-  factory UserStateLoginSuccess.fromMap(Map<String, dynamic> map) {
-    return new UserStateLoginSuccess(
+  factory LoginEvent.fromMap(Map<String, dynamic> map) {
+    return new LoginEvent(
       id: map['id'] as String,
       token: map['token'] as String,
       name: map['name'] as String,

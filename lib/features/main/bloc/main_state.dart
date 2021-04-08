@@ -1,16 +1,22 @@
-part of 'user_state_bloc.dart';
+part of 'main_bloc.dart';
 
 @immutable
-abstract class UserStateEvent {}
+abstract class MainState {}
+
+class UserStateInitial extends MainState {}
+
+class UserStateNotYetLogin extends MainState {}
 
 @immutable
-class InitEvent extends UserStateEvent {}
+class UserChangeTab extends MainState {
+  final int index;
+
+  UserChangeTab(this.index);
+
+}
 
 @immutable
-class LogoutEvent extends UserStateEvent {}
-
-@immutable
-class LoginEvent extends UserStateEvent {
+class UserStateLoginSuccess extends MainState {
   final String id;
   final String token;
   final String name;
@@ -18,14 +24,14 @@ class LoginEvent extends UserStateEvent {
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
-  LoginEvent({
+  UserStateLoginSuccess({
     required this.id,
     required this.token,
     required this.name,
     required this.langId,
-  }): super();
+  }) : super();
 
-  LoginEvent copyWith({
+  UserStateLoginSuccess copyWith({
     String? id,
     String? token,
     String? name,
@@ -38,7 +44,7 @@ class LoginEvent extends UserStateEvent {
       return this;
     }
 
-    return new LoginEvent(
+    return new UserStateLoginSuccess(
       id: id ?? this.id,
       token: token ?? this.token,
       name: name ?? this.name,
@@ -48,13 +54,13 @@ class LoginEvent extends UserStateEvent {
 
   @override
   String toString() {
-    return 'LoginEvent{id: $id, token: $token, name: $name, langId: $langId}';
+    return 'UserStateLoginSuccess{id: $id, token: $token, name: $name, langId: $langId}';
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is LoginEvent &&
+      (other is UserStateLoginSuccess &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           token == other.token &&
@@ -65,8 +71,8 @@ class LoginEvent extends UserStateEvent {
   int get hashCode =>
       id.hashCode ^ token.hashCode ^ name.hashCode ^ langId.hashCode;
 
-  factory LoginEvent.fromMap(Map<String, dynamic> map) {
-    return new LoginEvent(
+  factory UserStateLoginSuccess.fromMap(Map<String, dynamic> map) {
+    return new UserStateLoginSuccess(
       id: map['id'] as String,
       token: map['token'] as String,
       name: map['name'] as String,

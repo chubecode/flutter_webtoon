@@ -19,5 +19,21 @@
   "password": "Mật khẩu",
   "login_successful": "Đăng nhập thành công",
   "login_failed": "Đăng nhập thất bại",
-  "welcome_msg": "Chào mừng {} gia nhập hội kín"
+  "welcome_msg": "Chào mừng {} gia nhập hội kín",
+  "tab_news": "Bảng tin",
+  "tab_comic": "Truyện tranh",
+  "tab_novel": "Tiểu thuyết",
+  "tab_books": "Giá sách",
+  "search": "Tìm kiếm",
+  "receive": "Nhận",
+  "change": "Thay đổi",
+  "login_now": "Đăng nhập ngay",
+  "login_tooltip": "để theo dõi nhiều truyện hay!",
+  "list_comic": "Danh mục truyện tranh",
+  "list_novel": "Danh mục tiểu thuyết",
+  "my_club": "Hội nhóm của tôi",
+  "common_question": "Câu hỏi thường gặp",
+  "rate_this_app": "Đánh giá ứng dụng",
+  "legacy": "Chính sách điều khoản",
+  "feed_back": "Góp ý"
 }
