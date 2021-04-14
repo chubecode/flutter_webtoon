@@ -28,12 +28,12 @@ dependencies:
   intl: ^0.17.0
   # https://pub.dev/packages/dart_extensions
   #dart_extensions: 2.0.1 shoul  copy some code here
-  # https://pub.dev/packages/dio/versions/4.0.0-beta7
-  dio: ^4.0.0-beta7
-  # https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta
-  pretty_dio_logger: ^1.2.0-beta
+  # https://pub.dev/packages/dio
+  dio: ^4.0.0
+  # https://pub.dev/packages/pretty_dio_logger
+  pretty_dio_logger: ^1.2.0-beta-1
   # https://pub.dev/packages/cached_network_image
-  cached_network_image: ^2.5.1
+  cached_network_image: ^3.0.0
   # https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.0.4
   # DI https://pub.dev/packages/get_it

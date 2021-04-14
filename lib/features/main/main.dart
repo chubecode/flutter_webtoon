@@ -1,4 +1,3 @@
-import 'package:dart_extensions/dart_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webtoon/common/common_widgets.dart';
@@ -62,18 +61,15 @@ class MainScreen extends StatelessWidget {
     }
   }
 
-  StatelessWidget _renderBlocChange(MainState state, BuildContext context) {
+  Widget _renderBlocChange(MainState state, BuildContext context) {
     if (state is UserStateInitial) {
       return Container(color: Colors.white, child: loadingWidget());
     } else if (state is UserStateLoginSuccess) {
-      return HomeScreen();
+      return HomeScreen(0);
     } else if (state is UserChangeTab) {
-      return Container(
-        color: Colors.white,
-        child: Text('Tab ${state.index}').toCenter(),
-      );
+      return HomeScreen(state.index);
     } else {
-      return HomeScreen();
+      return HomeScreen(0);
     }
   }
 

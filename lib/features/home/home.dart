@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webtoon/features/home/bloc/home_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
+  final int tabIndex;
+  HomeScreen(this.tabIndex);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,10 +28,12 @@ class HomeScreen extends StatelessWidget {
       BuildContext context, Size size, HomeState state) {
     if (state is HomeInitial) {
       return Container(
-        child: Text('HomeInitial').toCenter(),
+        child: Text('HomeInitial $tabIndex').toCenter(),
       );
     } else {
-      return Container();
+      return Container(
+        child: Text('Error').toCenter(),
+      );
     }
   }
 }

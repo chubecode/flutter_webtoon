@@ -12,7 +12,21 @@ Dio createDioInstance() {
   );
 
   final Dio dio = Dio(baseOptions);
-  dio.interceptors.add(HeaderInterceptor());
+  dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
+    String url = options.uri.toString();
+    String body = ((options.data is String)
+            ? options.data
+            : (options.data != null ? jsonEncode(options.data) : "")) ??
+        "";
+    HttpMethod method = HttpMethod.GET;
+    if (options.method == 'POST') {
+      method = HttpMethod.POST;
+    }
+
+    Map<String, dynamic> headers = await _buildHeaders(url, body, method);
+    options.headers.addAll(headers);
+    return handler.next(options);
+  }));
   if (kDebugMode) {
     dio.interceptors.add(PrettyDioLogger());
   }
@@ -20,9 +34,16 @@ Dio createDioInstance() {
   return dio;
 }
 
+Future<Map<String, String>> _buildHeaders(
+    String url, String body, HttpMethod method) async {
+  Map<String, String> headers = {};
+
+  return headers;
+}
+
 Future<NetworkResult<T>> handleNetworkResult<T>(
-    Future<T> request,
-    ) async {
+  Future<T> request,
+) async {
   try {
     final dynamic response = await request;
 
@@ -31,9 +52,8 @@ Future<NetworkResult<T>> handleNetworkResult<T>(
     }
     throw Exception();
   } on DioError catch (e, stackTrace) {
-
     NetworkResult<T> networkResult =
-    NetworkResult<T>(error: NetworkError.DEFAULT);
+        NetworkResult<T>(error: NetworkError.DEFAULT);
 
     //CrashReport.getInstance().reportError(exception: e, stackTrace: stackTrace);
 
@@ -87,31 +107,11 @@ class NetworkResponseModel<T> {
   final T responseModel;
   final NetworkError error;
 
-  NetworkResponseModel({required this.responseModel, this.error = NetworkError.DEFAULT});
+  NetworkResponseModel(
+      {required this.responseModel, this.error = NetworkError.DEFAULT});
 
   bool isSuccess() {
     return responseModel != null;
-  }
-}
-
-class HeaderInterceptor extends Interceptor {
-  @override
-  Future onRequest(RequestOptions options) async {
-    String url = options.uri.toString();
-    String body = ((options.data is String) ? options.data : (options.data != null ? jsonEncode(options.data) : "")) ?? "";
-    HttpMethod method = HttpMethod.GET;
-    if (options.method == 'POST') {
-      method = HttpMethod.POST;
-    }
-
-    Map<String, dynamic> headers = await _buildHeaders(url, body, method);
-    options.headers.addAll(headers);
-  }
-
-  Future<Map<String, String>> _buildHeaders(
-      String url, String body, HttpMethod method) async {
-    Map<String, String> headers = {};
-    return headers;
   }
 }
 
