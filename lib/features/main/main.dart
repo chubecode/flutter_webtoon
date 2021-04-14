@@ -21,34 +21,34 @@ class MainScreen extends StatelessWidget {
           listener: (context, MainState state) {
             _listenBlocChange(state, context);
           },
-          child: SafeArea(
-            child: Scaffold(
-              key: _mainKey,
-              body: Column(
+          child: Scaffold(
+            key: _mainKey,
+            body: SafeArea(
+              child: Column(
                 children: [
                   MyCustomAppBar(
-                    onDrawerTap: ()=>{
-                      _mainKey.currentState!.openDrawer()
-                    },
+                    onDrawerTap: () => {_mainKey.currentState!.openDrawer()},
                     height: 60,
                   ),
-                  BlocBuilder<MainStateBloc, MainState>(
-                    builder: (BuildContext context, MainState state) {
-                      return _renderBlocChange(state, context);
-                    },
+                  Expanded(
+                    child: BlocBuilder<MainStateBloc, MainState>(
+                      builder: (BuildContext context, MainState state) {
+                        return _renderBlocChange(state, context);
+                      },
+                    ),
                   ),
                 ],
               ),
-              bottomNavigationBar: BlocBuilder<MainStateBloc, MainState>(
-                builder: (BuildContext context, MainState state) {
-                  if (state is UserChangeTab) {
-                    return _renderBottomBarChange(state, context);
-                  } else
-                    return _renderBottomBarChange(UserChangeTab(0), context);
-                },
-              ),
-              drawer: DrawerLayout(drawerWidth: drawerWidth),
             ),
+            bottomNavigationBar: BlocBuilder<MainStateBloc, MainState>(
+              builder: (BuildContext context, MainState state) {
+                if (state is UserChangeTab) {
+                  return _renderBottomBarChange(state, context);
+                } else
+                  return _renderBottomBarChange(UserChangeTab(0), context);
+              },
+            ),
+            drawer: DrawerLayout(drawerWidth: drawerWidth),
           ),
         );
       },
@@ -81,4 +81,3 @@ class MainScreen extends StatelessWidget {
     return BottomBar(state: state, context: context);
   }
 }
-
