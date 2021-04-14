@@ -18,6 +18,8 @@ import 'generated/locale_keys.g.dart';
 //flutter pub run easy_localization:generate --source-dir ./assets/translations -f keys -o locale_keys.g.dart
 // => LocaleKeys.money_args
 
+//Run when change retrofit config
+//flutter pub run build_runner build
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();

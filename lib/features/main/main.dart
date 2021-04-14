@@ -6,6 +6,7 @@ import 'package:flutter_webtoon/features/main/bloc/main_bloc.dart';
 import 'package:flutter_webtoon/features/main/custom_appbar.dart';
 import 'package:flutter_webtoon/features/main/custom_bottom_bar.dart';
 import 'package:flutter_webtoon/features/main/custom_drawer.dart';
+import 'package:flutter_webtoon/features/webcomic/webcomic.dart';
 
 class MainScreen extends StatelessWidget {
   static final screenName = "/";
@@ -67,7 +68,7 @@ class MainScreen extends StatelessWidget {
     } else if (state is UserStateLoginSuccess) {
       return HomeScreen(0);
     } else if (state is UserChangeTab) {
-      return HomeScreen(state.index);
+      return WebComicScreen();
     } else {
       return HomeScreen(0);
     }

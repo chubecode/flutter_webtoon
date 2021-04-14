@@ -1,15 +1,24 @@
-import 'package:flutter_webtoon/domain/entity/section_entity.dart';
-class WebComicEntity {
+part of 'web_comic_bloc.dart';
+
+@immutable
+abstract class WebComicState {}
+
+class WebComicInitial extends WebComicState {}
+
+class WebComicLoading extends WebComicState {}
+
+class WebComicError extends WebComicState {}
+
+class WebComicSuccess extends WebComicState {
   final List<SectionEntity> sections;
   final List<SectionEntity> actionbarSections;
   final List<SectionEntity> rankingSections;
   final List<SectionEntity> sliderSections;
 
-  WebComicEntity({
+  WebComicSuccess({
     required this.sections,
     required this.actionbarSections,
     required this.rankingSections,
     required this.sliderSections,
   });
-
 }
