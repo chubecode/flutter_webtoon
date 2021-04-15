@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dart_extensions/dart_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webtoon/common/common_widgets.dart';
+import 'package:flutter_webtoon/common/extension/extension.dart';
 import 'package:flutter_webtoon/domain/entity/section_entity.dart';
 import 'package:flutter_webtoon/features/webcomic/web_comic_bloc.dart';
-import 'package:flutter_webtoon/common/extension/extension.dart';
-import 'package:dart_extensions/dart_extensions.dart';
 
 class WebComicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<WebComicBloc>(
       create: (context) {
-        return WebComicBloc()
-          ..add(RequestWebComicEvent());
+        return WebComicBloc()..add(RequestWebComicEvent());
       },
       child: Scaffold(
         body: BlocBuilder<WebComicBloc, WebComicState>(
@@ -32,8 +32,7 @@ class WebComicScreen extends StatelessWidget {
       return Container(
         color: Colors.white,
         child: errorWidget(
-          onRetryClicked: (context) =>
-          {
+          onRetryClicked: (context) => {
             BlocProvider.of<WebComicBloc>(context).add(RequestWebComicEvent())
           },
         ),
@@ -48,44 +47,76 @@ class WebComicScreen extends StatelessWidget {
 
   Widget _renderSuccessState(WebComicSuccess state) {
     List<SectionEntity> sections = state.sections;
-    return ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: sections.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 134,
-            color: Colors.white,
-            child: Center(
-                child: Row(
-                  children: [
-                    CachedNetworkImage(
-                      width: 100,
-                      height: 134,
-                      imageUrl: "http://webtoon.tinyflutterteam.com/static/" +
-                          sections[index].items[0].thumb.defaultEmpty(),
-                      imageBuilder: (context, imageProvider) =>
-                          Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                  colorFilter:
-                                  ColorFilter.mode(
-                                      Colors.white, BlendMode.colorBurn)),
-                            ),
+    List<SectionEntity> sliderSections =
+        state.sliderSections.firstOrNull?.items.defaultEmpty();
+    return Column(
+      children: [
+        CarouselSlider.builder(
+          itemCount: sliderSections.length,
+          itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
+              Container(
+            child: CachedNetworkImage(
+              imageUrl: "http://webtoon.tinyflutterteam.com/static/" +
+                  sliderSections[itemIndex].topImageThumbUrl.defaultEmpty(),
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                      colorFilter:
+                          ColorFilter.mode(Colors.white, BlendMode.colorBurn)),
+                ),
+              ),
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+          options: CarouselOptions(
+              aspectRatio: 3 / 4,
+              enableInfiniteScroll: true,
+              autoPlay: true,
+              height: 100),
+        ),
+        Expanded(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: sections.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 134,
+                  color: Colors.white,
+                  child: Center(
+                      child: Row(
+                    children: [
+                      CachedNetworkImage(
+                        width: 100,
+                        height: 134,
+                        imageUrl: "http://webtoon.tinyflutterteam.com/static/" +
+                            sections[index].items[0].thumb.defaultEmpty(),
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.white, BlendMode.colorBurn)),
                           ),
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                    Expanded(
-                      child: Text(
-                        sections[index].items[0].name.defaultEmpty(),
+                        ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
-                    ),
-                  ],
-                )),
-          ).paddingOnly(top: 5,left: 5,right: 5);
-        });
+                      Expanded(
+                        child: Text(
+                          sections[index].items[0].name.defaultEmpty(),
+                        ),
+                      ),
+                    ],
+                  )),
+                ).paddingOnly(top: 5, left: 5, right: 5);
+              }),
+        ),
+      ],
+    );
   }
 }
