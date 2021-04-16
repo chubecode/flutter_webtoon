@@ -52,7 +52,7 @@ class WebComicScreen extends StatelessWidget {
 
   Widget _renderSuccessState(WebComicSuccess state) {
     List<SectionEntity> sections = state.sections;
-    List<TitleEntity> sliderSections = state.rankingSections.first.items;
+    List<TitleEntity> sliderSections = state.sliderSections.first.items;
     List<TitleEntity> actionSections = state.actionbarSections.first.items;
     return ListView(
       children: [

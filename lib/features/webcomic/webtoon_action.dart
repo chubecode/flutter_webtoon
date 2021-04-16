@@ -31,7 +31,7 @@ class WebtoonAction extends StatelessWidget {
                 width: 40,
                 height: 40,
                 imageUrl:
-                "http://webtoon.tinyflutterteam.com/static/images/" +
+                "http://webtoon.tinyflutterteam.com/static/" +
                     actionSections[index].thumb.defaultEmpty(),
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(

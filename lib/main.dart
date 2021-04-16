@@ -19,7 +19,7 @@ import 'generated/locale_keys.g.dart';
 // => LocaleKeys.money_args
 
 //Run when change retrofit config
-//flutter pub run build_runner build
+//flutter pub run build_runner build --delete-conflicting-outputs
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();

@@ -23,7 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.0.0-nullsafety.5
+  # https://pub.dev/packages/flutter_bloc 
+  flutter_bloc: ^7.0.0
   # https://pub.dev/packages/intl
   intl: ^0.17.0
   # https://pub.dev/packages/dart_extensions
