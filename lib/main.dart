@@ -14,6 +14,7 @@ import 'common/deeplink/deeplink_navigator.dart';
 import 'data/repository/webcomic/webcomic_repository_impl.dart';
 import 'domain/usecase/check_user_state_usecase.dart';
 import 'features/main/bloc/main_bloc.dart';
+import 'features/title_detail/title_detail.dart';
 import 'generated/codegen_loader.g.dart';
 import 'generated/locale_keys.g.dart';
 import 'package:uni_links2/uni_links.dart';
@@ -111,6 +112,7 @@ class _StartAppState extends State<StartApp> {
         initialRoute: MainScreen.screenName,
         routes: {
           MainScreen.screenName: (context) => MainScreen(),
+          TitleDetailScreen.screenName: (context) => TitleDetailScreen(),
         },
       ),
     );

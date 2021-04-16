@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_webtoon/common/deeplink/deeplink_navigator.dart';
 import 'package:flutter_webtoon/common/extension/extension.dart';
 import 'package:flutter_webtoon/domain/entity/section_entity.dart';
 import 'package:dart_extensions/dart_extensions.dart';
+import 'package:get_it/get_it.dart';
 
 class WebtoonList extends StatelessWidget {
   const WebtoonList({
@@ -26,9 +28,7 @@ class WebtoonList extends StatelessWidget {
               style: TextStyle(
                 color: Colors.green,
               ),
-            ).onTap(() => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content:
-                    Text(sections.first.navigationActionLink.defaultEmpty()))))
+            ).onTap(() => GetIt.instance.get<DeeplinkNavigator>().gotoDeeplink(context, sections.first.navigationActionLink.defaultEmpty()))
           ],
         ).paddingOnly(left: 10, right: 10),
         GridView.builder(
@@ -71,10 +71,7 @@ class WebtoonList extends StatelessWidget {
                       ).paddingOnly(left: 10, top: 5),
                     ),
                   ],
-                ).onTap(() => ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                        content: Text(sections.first.items[index].deeplink
-                            .defaultEmpty())))),
+                ).onTap(() => GetIt.instance.get<DeeplinkNavigator>().gotoDeeplink(context, sections.first.items[index].deeplink.defaultEmpty())),
               ).paddingOnly(top: 5, left: 5, right: 5);
             },
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
