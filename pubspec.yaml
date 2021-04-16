@@ -28,12 +28,12 @@ dependencies:
   intl: ^0.17.0
   # https://pub.dev/packages/dart_extensions
   #dart_extensions: 2.0.1 shoul  copy some code here
-  # https://pub.dev/packages/dio/versions/4.0.0-beta7
-  dio: ^4.0.0-beta7
-  # https://pub.dev/packages/pretty_dio_logger/versions/1.2.0-beta
-  pretty_dio_logger: ^1.2.0-beta
+  # https://pub.dev/packages/dio
+  dio: ^4.0.0
+  # https://pub.dev/packages/pretty_dio_logger
+  pretty_dio_logger: ^1.2.0-beta-1
   # https://pub.dev/packages/cached_network_image
-  cached_network_image: ^2.5.1
+  cached_network_image: ^3.0.0
   # https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.0.4
   # DI https://pub.dev/packages/get_it
@@ -44,6 +44,15 @@ dependencies:
   dart_extensions: ^2.0.1
   # https://pub.dev/packages/flutter_svg
   flutter_svg: ^0.21.0-nullsafety.0
+  # https://pub.dev/packages/retrofit
+  retrofit: ^2.0.0-beta1
+  # https://pub.dev/packages/logger
+  logger: ^1.0.0-nullsafety.0
+  # https://pub.dev/packages/json_serializable
+  json_serializable: ^4.1.0
+  # https://pub.dev/packages/carousel_slider
+  carousel_slider: ^4.0.0-nullsafety.0
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -54,6 +63,8 @@ dev_dependencies:
     sdk: flutter
   # https://pub.dev/packages/pedantic
   pedantic: ^1.11.0
+  retrofit_generator: ^2.0.0-beta3
+  build_runner: ^1.12.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_webtoon/domain/entity/user_entity.dart';
-
 @immutable
 class UserStateEntity {
   final UserEntity? user;
