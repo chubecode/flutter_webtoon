@@ -1,10 +1,11 @@
-import 'package:flutter_webtoon/domain/entity/title_entity.dart';
+import 'package:flutter_webtoon/domain/entity/section_item_entity.dart';
+
 class SectionEntity {
   final String? name;
   final int? index;
-  final TitleEntity? title1;
-  final TitleEntity? title2;
-  final List<TitleEntity> items;
+  final SectionItemEntity? title1;
+  final SectionItemEntity? title2;
+  final List<SectionItemEntity> items;
   final String? actionText;
   final String? navigationActionLink;
   final String? topImageThumbUrl;
@@ -19,5 +20,4 @@ class SectionEntity {
     this.navigationActionLink = "",
     this.topImageThumbUrl = "",
   });
-
 }

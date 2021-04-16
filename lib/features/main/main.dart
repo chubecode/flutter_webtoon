@@ -24,18 +24,16 @@ class MainScreen extends StatelessWidget {
           child: Scaffold(
             key: _mainKey,
             body: SafeArea(
-              child: Column(
+              child: Stack(
                 children: [
+                  BlocBuilder<MainStateBloc, MainState>(
+                    builder: (BuildContext context, MainState state) {
+                      return _renderBlocChange(state, context);
+                    },
+                  ),
                   MyCustomAppBar(
                     onDrawerTap: () => {_mainKey.currentState!.openDrawer()},
                     height: 60,
-                  ),
-                  Expanded(
-                    child: BlocBuilder<MainStateBloc, MainState>(
-                      builder: (BuildContext context, MainState state) {
-                        return _renderBlocChange(state, context);
-                      },
-                    ),
                   ),
                 ],
               ),
