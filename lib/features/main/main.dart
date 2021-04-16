@@ -15,7 +15,6 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        var drawerWidth = MediaQuery.of(context).size.width * 0.9;
         GlobalKey<ScaffoldState> _mainKey = GlobalKey();
         return BlocListener<MainStateBloc, MainState>(
           listener: (context, MainState state) {
@@ -46,7 +45,8 @@ class MainScreen extends StatelessWidget {
                   return _renderBottomBarChange(UserChangeTab(0), context);
               },
             ),
-            drawer: DrawerLayout(drawerWidth: drawerWidth),
+            drawer: DrawerLayout(
+                drawerWidth: MediaQuery.of(context).size.width * 0.9),
           ),
         );
       },
