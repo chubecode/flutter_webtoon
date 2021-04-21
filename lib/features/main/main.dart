@@ -10,11 +10,12 @@ import 'package:flutter_webtoon/features/webcomic/webcomic.dart';
 
 class MainScreen extends StatelessWidget {
   static final screenName = "/";
-
+  final PageController controller = PageController(initialPage: 1, keepPage: true);
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
+
         GlobalKey<ScaffoldState> _mainKey = GlobalKey();
         return BlocListener<MainStateBloc, MainState>(
           listener: (context, MainState state) {
@@ -25,10 +26,19 @@ class MainScreen extends StatelessWidget {
             body: SafeArea(
               child: Stack(
                 children: [
-                  BlocBuilder<MainStateBloc, MainState>(
-                    builder: (BuildContext context, MainState state) {
-                      return _renderBlocChange(state, context);
+                  PageView(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller,
+                    onPageChanged: (value) {
+                      BlocProvider.of<MainStateBloc>(context)
+                          .add(ChangeTabEvent(value));
                     },
+                    children: <Widget>[
+                      HomeScreen(0),
+                      WebComicScreen(),
+                      HomeScreen(2),
+                      HomeScreen(3),
+                    ],
                   ),
                   MyCustomAppBar(
                     onDrawerTap: () => {_mainKey.currentState!.openDrawer()},
@@ -60,19 +70,12 @@ class MainScreen extends StatelessWidget {
     }
   }
 
-  Widget _renderBlocChange(MainState state, BuildContext context) {
-    if (state is UserStateInitial) {
-      return Container(color: Colors.white, child: loadingWidget());
-    } else if (state is UserStateLoginSuccess) {
-      return HomeScreen(0);
-    } else if (state is UserChangeTab) {
-      return WebComicScreen();
-    } else {
-      return HomeScreen(0);
-    }
-  }
-
   Widget _renderBottomBarChange(UserChangeTab state, BuildContext context) {
+    // controller.animateToPage(
+    //   state.index,
+    //   duration: const Duration(milliseconds: 400),
+    //   curve: Curves.easeInOut,
+    // );
     return BottomBar(state: state, context: context);
   }
 }
