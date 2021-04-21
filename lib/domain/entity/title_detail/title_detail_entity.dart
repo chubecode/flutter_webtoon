@@ -6,19 +6,19 @@ class TitleDetailEntity {
   final String name;
   final String description;
   final String author;
-  final String releaseDate;
-  final String titleType;
+  final DateTime releaseDate;
+  final TitleType titleType;
   final String thumbVerticalUrl;
   final String thumbDetailUrl;
-  final String status;
-  final String readStatus;
+  final Status status;
+  final ReadStatus readStatus;
   final int avgReviewScore;
   final int numReview;
   final int numLike;
   final int numRead;
   final int numComment;
   final int numChapter;
-  final List<Chapters> chapters;
+  final List<ChapterEntity> chapters;
 
   const TitleDetailEntity({
     required this.id,
@@ -42,21 +42,38 @@ class TitleDetailEntity {
 }
 
 @immutable
-class Chapters {
-	final String id;
-	final String name;
-	final String releaseDate;
-	final int numLike;
-	final int numRead;
-	final int numComment;
+class ChapterEntity {
+  final String id;
+  final String name;
+  final DateTime releaseDate;
+  final int numLike;
+  final int numRead;
+  final int numComment;
 
-	const Chapters({
-		required this.id,
-		required this.name,
-		required this.releaseDate,
-		required this.numLike,
-		required this.numRead,
-		required this.numComment,
-	});
+  const ChapterEntity({
+    required this.id,
+    required this.name,
+    required this.releaseDate,
+    required this.numLike,
+    required this.numRead,
+    required this.numComment,
+  });
+}
 
+enum ReadStatus {
+  OnGoing, // 'OG'
+  Suppended, // 'SP'
+  Stoped, // ST
+  Full, //FU
+}
+
+enum Status {
+  Open, // 'O'
+  Close, // 'C'
+  CommingSoon, // CS
+}
+
+enum TitleType {
+  WebComic, // 'WC'
+  WebNovel, // 'WN'
 }

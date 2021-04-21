@@ -1,11 +1,11 @@
 import 'package:intl/intl.dart';
 
-final DateFormat _dayFormat = new DateFormat("dd/MM/yyyy");
+final DateFormat _dayFormat = new DateFormat("yyyy-MM-dd");
 
 extension StringUtils on String {
   DateTime parseDate(String format) => DateFormat(format).parse(this);
 
-  DateTime parseDateApi(String format) => _dayFormat.parse(this);
+  DateTime parseDateApi() => _dayFormat.parse(this);
 }
 
 extension StringNullUtils on String? {
