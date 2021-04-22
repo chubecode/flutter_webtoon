@@ -71,9 +71,7 @@ class TitleDetailMapper {
 
   List<ChapterEntity> mapChapters(List<Chapters>? chapters) {
     if (chapters != null) {
-      return chapters
-          .map((e) => mapChapterEntity(e))
-          .toList(growable: false);
+      return chapters.map((e) => mapChapterEntity(e)).toList(growable: false);
     } else {
       return List.empty();
     }
@@ -87,6 +85,6 @@ class TitleDetailMapper {
       numLike: chapter.numLike.defaultZero(),
       numRead: chapter.numRead.defaultZero(),
       releaseDate: chapter.releaseDate.defaultEmpty().parseDateApi(),
-    )
+    );
   }
 }

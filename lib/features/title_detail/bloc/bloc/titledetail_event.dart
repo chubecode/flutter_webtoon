@@ -4,4 +4,8 @@ part of 'titledetail_bloc.dart';
 abstract class TitledetailEvent {}
 
 @immutable
-class InitEvent extends TitledetailEvent {}
+class RequestTitleEvent extends TitledetailEvent {
+  final String titleId;
+
+  RequestTitleEvent({required this.titleId});
+}

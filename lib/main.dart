@@ -11,8 +11,12 @@ import 'package:get_it/get_it.dart';
 import 'common/appTheme.dart';
 import 'common/deeplink/deeplink_init.dart';
 import 'common/deeplink/deeplink_navigator.dart';
+import 'data/repository/title_detail/title_detail_mapper.dart';
+import 'data/repository/title_detail/title_repository_impl.dart';
 import 'data/repository/webcomic/webcomic_repository_impl.dart';
+import 'domain/repositories/title_repository.dart';
 import 'domain/usecase/check_user_state_usecase.dart';
+import 'domain/usecase/title_detail/get_title_detail_usecase.dart';
 import 'features/main/bloc/main_bloc.dart';
 import 'features/title_detail/title_detail.dart';
 import 'generated/codegen_loader.g.dart';
@@ -59,29 +63,33 @@ void _initGetItDi() {
   GetIt.instance.registerLazySingleton<WebcomicRepository>(
       () => WebcomicRepositoryImpl());
   GetIt.instance.registerFactory(() => GetWebComicsUseCase());
+  GetIt.instance.registerFactory(() => TitleDetailMapper());
+  GetIt.instance.registerLazySingleton<TitleRepository>(
+      () => TitleRepositoryImpl(GetIt.instance.get<TitleDetailMapper>()));
+  GetIt.instance.registerFactory(() => GetTitleDetailUseCase());
 }
 
 class StartApp extends StatefulWidget {
-
   @override
   _StartAppState createState() => _StartAppState();
 }
 
 class _StartAppState extends State<StartApp> {
-
   StreamSubscription? _sub;
 
   @override
   void initState() {
     String? initDeeplink = GetIt.instance.get<DeeplinkInit>().getInitDeeplink();
-    if(initDeeplink != null) {
-      GetIt.instance.get<DeeplinkNavigator>().gotoDeeplink(context, initDeeplink);
+    if (initDeeplink != null) {
+      GetIt.instance
+          .get<DeeplinkNavigator>()
+          .gotoDeeplink(context, initDeeplink);
     }
     GetIt.instance.get<DeeplinkInit>().clearInitDeeplink();
 
     _sub = linkStream.listen((String? link) {
       if (!mounted) return;
-      if(link != null) {
+      if (link != null) {
         GetIt.instance.get<DeeplinkNavigator>().gotoDeeplink(context, link);
       }
     }, onError: (err) {
@@ -96,6 +104,7 @@ class _StartAppState extends State<StartApp> {
     _sub?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MainStateBloc>(
