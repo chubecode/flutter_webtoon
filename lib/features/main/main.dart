@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webtoon/common/common_widgets.dart';
+import 'package:flutter_webtoon/common/enums.dart';
 import 'package:flutter_webtoon/features/home/home.dart';
 import 'package:flutter_webtoon/features/main/bloc/main_bloc.dart';
 import 'package:flutter_webtoon/features/main/custom_appbar.dart';
@@ -11,12 +12,13 @@ import 'package:flutter_webtoon/features/webcomic/webcomic.dart';
 
 class MainScreen extends StatelessWidget {
   static final screenName = "/";
-  final PageController controller = PageController(initialPage: 1, keepPage: true);
+  final PageController controller =
+  PageController(initialPage: 1, keepPage: true);
+
   @override
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-
         GlobalKey<ScaffoldState> _mainKey = GlobalKey();
         return BlocListener<MainStateBloc, MainState>(
           listener: (context, MainState state) {
@@ -35,9 +37,11 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-            bottomNavigationBar: BottomBar(),
             drawer: DrawerLayout(
-                drawerWidth: MediaQuery.of(context).size.width * 0.9),
+                drawerWidth: MediaQuery
+                    .of(context)
+                    .size
+                    .width * 0.9),
           ),
         );
       },
@@ -50,5 +54,6 @@ class MainScreen extends StatelessWidget {
           .popUntil(ModalRoute.withName(MainScreen.screenName));
     }
   }
+
 
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webtoon/features/home/home.dart';
 import 'package:flutter_webtoon/features/webcomic/webcomic.dart';
+import 'package:flutter_webtoon/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class WebtoonPageView extends StatefulWidget {
   @override
@@ -8,12 +10,29 @@ class WebtoonPageView extends StatefulWidget {
 }
 
 class _WebtoonPageViewState extends State<WebtoonPageView> {
-  int _selectedPage = 0;
+  int bottomSelectedIndex = 0;
 
-  @override
-  Widget build(BuildContext context) {
-    return buildPageView();
+  List<BottomNavigationBarItem> buildBottomNavBarItems() {
+    return [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.fiber_new),
+        label: LocaleKeys.tab_news.tr(),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.broken_image_outlined),
+        label: LocaleKeys.tab_comic.tr(),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.pending),
+        label: LocaleKeys.tab_novel.tr(),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.book),
+        label: LocaleKeys.tab_books.tr(),
+      ),
+    ];
   }
+
   PageController pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -34,16 +53,41 @@ class _WebtoonPageViewState extends State<WebtoonPageView> {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void pageChanged(int index) {
     setState(() {
-      _selectedPage = index;
+      bottomSelectedIndex = index;
     });
   }
 
   void bottomTapped(int index) {
     setState(() {
-      _selectedPage = index;
-      pageController.animateToPage(index, duration: Duration(milliseconds: 200), curve: Curves.bounceInOut);
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index,
+          duration: Duration(milliseconds: 600), curve: Curves.ease);
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      body: buildPageView(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomSelectedIndex,
+        selectedItemColor: Colors.green,
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          bottomTapped(index);
+        },
+        items: buildBottomNavBarItems(),
+      ),
+    );
+  }
+
 }
