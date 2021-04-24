@@ -36,7 +36,22 @@ class CodegenLoader extends AssetLoader{
   "login_successful": "Login Successful",
   "login_failed": "Login Failed",
   "welcome_msg": "Welcome {} join closed society",
-  "click_change_language": "Click this line to change language"
+  "tab_news": "New feed",
+  "tab_comic": "Comic",
+  "tab_novel": "Novel",
+  "tab_books": "Books",
+  "search": "Search",
+  "receive": "Receive",
+  "change": "Change",
+  "login_now": "Login now",
+  "login_tooltip": "to follow good stories!",
+  "list_comic": "List of comic",
+  "list_novel": "List of novel",
+  "my_club": "My club",
+  "common_question": "common question",
+  "rate_this_app": "Rate this app",
+  "legacy": "Legacy",
+  "feed_back": "Feedback"
 };
 static const Map<String,dynamic> vi = {
   "app_title": "Chào mấy cưng",
@@ -60,7 +75,22 @@ static const Map<String,dynamic> vi = {
   "login_successful": "Đăng nhập thành công",
   "login_failed": "Đăng nhập thất bại",
   "welcome_msg": "Chào mừng {} gia nhập hội kín",
-  "click_change_language": "Bấm vào dòng này để đổi ngôn ngữ"
+  "tab_news": "Bảng tin",
+  "tab_comic": "Truyện tranh",
+  "tab_novel": "Tiểu thuyết",
+  "tab_books": "Giá sách",
+  "search": "Tìm kiếm",
+  "receive": "Nhận",
+  "change": "Thay đổi",
+  "login_now": "Đăng nhập ngay",
+  "login_tooltip": "để theo dõi nhiều truyện hay!",
+  "list_comic": "Danh mục truyện tranh",
+  "list_novel": "Danh mục tiểu thuyết",
+  "my_club": "Hội nhóm của tôi",
+  "common_question": "Câu hỏi thường gặp",
+  "rate_this_app": "Đánh giá ứng dụng",
+  "legacy": "Chính sách điều khoản",
+  "feed_back": "Góp ý"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "vi": vi};
 }

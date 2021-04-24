@@ -48,3 +48,5 @@ app.*.map.json
 /lib/data/remote/entities/webcomic/web_comic_response.g.dart
 /lib/data/remote/entities/webcomic/title_response.g.dart
 /lib/data/remote/entities/webcomic/section_response.g.dart
+
+pubspec.lock

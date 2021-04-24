@@ -11,20 +11,35 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_webtoon/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(StartApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  var uri = Uri.parse('deeplink://webcomic/top50/?id=5feaeecf3ee38170487e8dff');
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  print("uri.authority " + uri.authority);
+  print("uri.fragment " + uri.fragment);
+  print("uri.scheme " + uri.scheme);
+  print("uri.host " + uri.host);
+  print("uri.pathSegments " + uri.pathSegments.toString());
+
+  uri.queryParameters.forEach((k, v) {
+    print('key: $k - value: $v');
   });
+
+  // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  //
+  //   // Build our app and trigger a frame.
+  //   await tester.pumpWidget(StartApp());
+  //
+  //   // Verify that our counter starts at 0.
+  //   expect(find.text('0'), findsOneWidget);
+  //   expect(find.text('1'), findsNothing);
+  //
+  //   // Tap the '+' icon and trigger a frame.
+  //   await tester.tap(find.byIcon(Icons.add));
+  //   await tester.pump();
+  //
+  //   // Verify that our counter has incremented.
+  //   expect(find.text('0'), findsNothing);
+  //   expect(find.text('1'), findsOneWidget);
+  // });
 }
