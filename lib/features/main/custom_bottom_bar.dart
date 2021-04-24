@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_webtoon/common/enums.dart';
 import 'package:flutter_webtoon/features/main/bloc/main_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_webtoon/generated/locale_keys.g.dart';
 
 class BottomBar extends StatelessWidget {
-  final UserChangeTab state;
+  final MenuState selectedMenu;
   final BuildContext context;
 
   const BottomBar({
     Key? key,
-    required this.state,
+    @required this.selectedMenu,
     required this.context,
   }) : super(key: key);
 
