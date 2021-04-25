@@ -8,26 +8,26 @@ import 'package:flutter_webtoon/domain/entity/section_entity.dart';
 import 'package:flutter_webtoon/domain/entity/title_entity.dart';
 import 'package:flutter_webtoon/domain/entity/web_comic_entity.dart';
 import 'package:flutter_webtoon/domain/repositories/webcomic_repository.dart';
-import 'package:flutter_webtoon/domain/usecase/base_usecase.dart' as baseUC;
 import 'package:flutter_webtoon/common/extension/extension.dart';
+import 'package:flutter_webtoon/domain/usecase/base_usecase.dart' as baseUseCase;
 
 class WebcomicRepositoryImpl extends WebcomicRepository {
   @override
-  Future<Either<baseUC.Error, WebComicEntity>> getWebcomics() async {
+  Future<Either<baseUseCase.Error, WebComicEntity>> getWebcomics() async {
     // TODO: implement getWebcomics
     var requestGetBooks = apiServiceInstance.getWebComic();
     var getWebcomicsResult = await handleNetworkResult(requestGetBooks);
-    if (getWebcomicsResult.isSuccess()) {
-      var response = getWebcomicsResult.response;
-      if (response != null) {
-        return SuccessValue(mapWebComicEntity(response));
+    var response = getWebcomicsResult.response;
+    if (getWebcomicsResult.isSuccess() && response!=null) {
+      if (response.data != null) {
+        return SuccessValue(mapWebComicEntity(response.data));
       } else {
-        return FailValue(
-            baseUC.NetworkError(errorCode: 404, errorMsg: "error"));
+        return FailValue(baseUseCase.NetworkError(errorCode: response.header.resultCode.defaultZero(),errorMsg: response.header.resultMessage.defaultEmpty()));
       }
-    } else {
-      return FailValue(baseUC.NetworkError(errorCode: 404, errorMsg: "error"));
     }
+    return FailValue(baseUseCase.NetworkError(errorCode: response?.header.resultCode.defaultZero(),errorMsg: response.header.resultMessage.defaultEmpty()));
+    
+    Either.tryCatch((err) => null, () => null)
   }
 
   WebComicEntity mapWebComicEntity(WebComicResponse webComicResponse) {
