@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_webtoon/common/common_widgets.dart';
-import 'package:flutter_webtoon/common/enums.dart';
-import 'package:flutter_webtoon/features/home/home.dart';
 import 'package:flutter_webtoon/features/main/bloc/main_bloc.dart';
 import 'package:flutter_webtoon/features/main/custom_appbar.dart';
-import 'package:flutter_webtoon/features/main/custom_bottom_bar.dart';
 import 'package:flutter_webtoon/features/main/custom_drawer.dart';
 import 'package:flutter_webtoon/features/main/custom_page_view.dart';
-import 'package:flutter_webtoon/features/webcomic/webcomic.dart';
 
 class MainScreen extends StatelessWidget {
   static final screenName = "/";
