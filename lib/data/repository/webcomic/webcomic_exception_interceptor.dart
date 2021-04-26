@@ -5,8 +5,9 @@ import 'package:flutter_webtoon/common/exception/failure.dart';
 class WebComicExceptionInterceptor extends ExceptionInterceptor {
   @override
   Failure? handleException(Exception exception) {
-    // TODO: implement handleException
-    throw UnimplementedError();
+    switch(exception){
+      case ServerError
+    }
   }
 
 }
