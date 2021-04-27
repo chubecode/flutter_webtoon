@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_webtoon/common/exception/failure.dart';
 import 'package:flutter_webtoon/domain/either.dart';
 import 'package:flutter_webtoon/domain/entity/user_state_entity.dart';
 import 'package:flutter_webtoon/domain/usecase/base_usecase.dart';
@@ -39,7 +40,7 @@ class MainStateBloc extends Bloc<MainStateEvent, MainState> {
   }
 
   Stream<MainState> handleEventInit() async* {
-    Either<Error, UserStateEntity> state =
+    Either<Failure, UserStateEntity> state =
         await _getUserStateUseCase.execute(EmptyInput());
     if (state.isSuccess) {
       var userEntity = state.success.user;

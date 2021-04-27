@@ -71,16 +71,6 @@ abstract class Either<Fail, Success> {
       bool test, Lazy<L> leftValue, Lazy<R> rightValue) =>
       test ? SuccessValue(rightValue()) : FailValue(leftValue());
 
-  static Either<L, R> runSuspendWithCatchError(
-      List<ExceptionInterceptor> errorInterceptors,
-      R Function() fnR) {
-    try {
-      return SuccessValue(fnR());
-    }  catch (e) {
-      err
-      return FailValue(onError(e));
-    }
-  }
 }
 
 /// Used for "failure"

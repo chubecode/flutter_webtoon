@@ -6,7 +6,9 @@ class WebComicExceptionInterceptor extends ExceptionInterceptor {
   @override
   Failure? handleException(Exception exception) {
     switch(exception){
-      case ServerError
+      // case ServerError:
+      //   break;
+    //WAITING FOR CONVERTER support from retrofit flutter team.
     }
   }
 

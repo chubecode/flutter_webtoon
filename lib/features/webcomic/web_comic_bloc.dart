@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_webtoon/common/exception/failure.dart';
 import 'package:flutter_webtoon/domain/either.dart';
 import 'package:flutter_webtoon/domain/entity/section_entity.dart';
 import 'package:flutter_webtoon/domain/entity/web_comic_entity.dart';
@@ -28,7 +29,7 @@ class WebComicBloc extends Bloc<WebComicEvent, WebComicState> {
 
   Stream<WebComicState> _handleRequestEvent() async* {
     yield WebComicLoading();
-    Either<Error, WebComicEntity> result =
+    Either<Failure, WebComicEntity> result =
     await _getWebComicsUseCase.execute(EmptyInput());
     if (result.isSuccess) {
       yield WebComicSuccess(
