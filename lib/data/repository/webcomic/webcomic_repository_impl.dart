@@ -1,3 +1,4 @@
+import 'package:flutter_webtoon/common/exception/failure.dart';
 import 'package:flutter_webtoon/common/network.dart';
 import 'package:flutter_webtoon/data/remote/api_service.dart';
 import 'package:flutter_webtoon/data/remote/entities/webcomic/section_response.dart';
@@ -13,16 +14,17 @@ import 'package:flutter_webtoon/domain/usecase/base_usecase.dart' as baseUseCase
 
 class WebcomicRepositoryImpl extends WebcomicRepository {
   @override
-  Future<Either<baseUseCase.Error, WebComicEntity>> getWebcomics() async {
+  Future<Either<Failure, WebComicEntity>> getWebcomics() async {
     // TODO: implement getWebcomics
     var requestGetBooks = apiServiceInstance.getWebComic();
     var getWebcomicsResult = await handleNetworkResult(requestGetBooks);
+    //
     var response = getWebcomicsResult.response;
     if (getWebcomicsResult.isSuccess() && response!=null) {
       if (response.data != null) {
         return SuccessValue(mapWebComicEntity(response.data));
       } else {
-        return FailValue(baseUseCase.NetworkError(errorCode: response.header.resultCode.defaultZero(),errorMsg: response.header.resultMessage.defaultEmpty()));
+        return FailValue(response.header.er);
       }
     }
     return FailValue(baseUseCase.NetworkError(errorCode: response?.header.resultCode.defaultZero(),errorMsg: response.header.resultMessage.defaultEmpty()));
