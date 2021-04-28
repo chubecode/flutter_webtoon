@@ -1,12 +1,11 @@
-class TitleEntity {
+class SectionItemEntity {
   final String? deeplink;
   final String? name;
   final String? thumb;
 
-  TitleEntity({
+  SectionItemEntity({
     this.deeplink,
     this.name,
     this.thumb,
   });
-
 }

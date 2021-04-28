@@ -16,7 +16,6 @@ class WebtoonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Row(
@@ -37,7 +36,7 @@ class WebtoonList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              var widthEachItem = size.width / 3 - 28;
+              var widthEachItem = MediaQuery.of(context).size.width / 3 - 28;
               return Container(
                 width: double.infinity,
                 child: Column(
