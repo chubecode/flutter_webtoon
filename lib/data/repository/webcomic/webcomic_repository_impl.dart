@@ -1,4 +1,6 @@
+
 import 'package:flutter_webtoon/common/extension/extension.dart';
+import 'package:flutter_webtoon/common/exception/failure.dart';
 import 'package:flutter_webtoon/common/network.dart';
 import 'package:flutter_webtoon/data/remote/api_service.dart';
 import 'package:flutter_webtoon/data/remote/entities/webcomic/section_response.dart';
@@ -9,33 +11,29 @@ import 'package:flutter_webtoon/domain/entity/section_entity.dart';
 import 'package:flutter_webtoon/domain/entity/section_item_entity.dart';
 import 'package:flutter_webtoon/domain/entity/web_comic_entity.dart';
 import 'package:flutter_webtoon/domain/repositories/webcomic_repository.dart';
-import 'package:flutter_webtoon/domain/usecase/base_usecase.dart' as baseUC;
+
 
 class WebcomicRepositoryImpl extends WebcomicRepository {
   @override
-  Future<Either<baseUC.Error, WebComicEntity>> getWebcomics() async {
+  Future<Either<Failure, WebComicEntity>> getWebcomics() async {
     // TODO: implement getWebcomics
     var requestGetBooks = apiServiceInstance.getWebComic();
     var getWebcomicsResult = await handleNetworkResult(requestGetBooks);
     if (getWebcomicsResult.isSuccess()) {
       var response = getWebcomicsResult.response;
-      if (response != null) {
-        return SuccessValue(mapWebComicEntity(response));
-      } else {
-        return FailValue(
-            baseUC.NetworkError(errorCode: 404, errorMsg: "error"));
-      }
+      return SuccessValue(mapWebComicEntity(response?.data));
     } else {
-      return FailValue(baseUC.NetworkError(errorCode: 404, errorMsg: "error"));
+      return FailValue(Failure.serverError(
+          getWebcomicsResult.errorCode, getWebcomicsResult.error.toString()));
     }
   }
 
-  WebComicEntity mapWebComicEntity(WebComicResponse webComicResponse) {
+  WebComicEntity mapWebComicEntity(WebComicResponse? webComicResponse) {
     return WebComicEntity(
-        sections: mapSections(webComicResponse.sections),
-        actionbarSections: mapSections(webComicResponse.actionbarSections),
-        rankingSections: mapSections(webComicResponse.rankingSections),
-        sliderSections: mapSections(webComicResponse.sliderSections));
+        sections: mapSections(webComicResponse?.sections),
+        actionbarSections: mapSections(webComicResponse?.actionbarSections),
+        rankingSections: mapSections(webComicResponse?.rankingSections),
+        sliderSections: mapSections(webComicResponse?.sliderSections));
   }
 
   List<SectionEntity> mapSections(List<SectionResponse?>? sectionResponses) {

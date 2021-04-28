@@ -95,8 +95,10 @@ enum NetworkError {
 class NetworkResult<T> {
   final T? response;
   final NetworkError error;
+  final int errorCode;
 
-  NetworkResult({this.response, this.error = NetworkError.DEFAULT});
+  NetworkResult(
+      {this.response, this.error = NetworkError.DEFAULT, this.errorCode = 0});
 
   bool isSuccess() {
     return response != null;

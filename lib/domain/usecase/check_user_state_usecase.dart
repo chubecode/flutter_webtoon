@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_webtoon/common/exception/failure.dart';
 import 'package:flutter_webtoon/domain/either.dart';
 import 'package:flutter_webtoon/domain/entity/user_entity.dart';
 import 'package:flutter_webtoon/domain/entity/user_state_entity.dart';
@@ -8,7 +9,7 @@ import 'base_usecase.dart';
 
 class CheckUserStateUseCase extends BaseUseCase<EmptyInput, UserStateEntity> {
   @override
-  Future<Either<Error, UserStateEntity>> executeInternal(EmptyInput input) async {
+  Future<Either<Failure, UserStateEntity>> executeInternal(EmptyInput input) async {
     await Future.delayed(Duration(seconds: 3));
     List<String> arrLang = ['vi','en'];
     return SuccessValue(
