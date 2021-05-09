@@ -12,7 +12,7 @@ import 'package:flutter_webtoon/main.dart';
 
 void main() {
 
-  var uri = Uri.parse('deeplink://webcomic/top50/?id=5feaeecf3ee38170487e8dff');
+  var uri = Uri.parse('deeplink://webcomic?id=5feaeecf3ee38170487e8dff');
 
 
   print("uri.authority " + uri.authority);

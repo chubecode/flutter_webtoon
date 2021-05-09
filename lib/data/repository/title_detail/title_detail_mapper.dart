@@ -18,15 +18,16 @@ class TitleDetailMapper {
       numRead: (response?.numRead).defaultZero(),
       numReview: (response?.numReview).defaultZero(),
       readStatus: mapReadStatus((response?.readStatus).defaultEmpty()),
-      releaseDate: (response?.releaseDate).defaultEmpty().parseDateApi(),
+      //releaseDate: (response?.releaseDate).defaultEmpty().parseDateApi(),
+      releaseDate: DateTime.now(),
       status: mapStatus((response?.status).defaultEmpty()),
-      thumbDetailUrl: (response?.thumbDetailUrl).defaultEmpty(),
-      thumbVerticalUrl: (response?.thumbVerticalUrl).defaultEmpty(),
+      thumbDetailUrl: "http://webtoon.tinyflutterteam.com/static/" + (response?.thumbDetailUrl).defaultEmpty(),
+      thumbVerticalUrl: "http://webtoon.tinyflutterteam.com/static/" + (response?.thumbVerticalUrl).defaultEmpty(),
       titleType: mapTitleType((response?.titleType).defaultEmpty()),
     );
   }
 
-  TitleType mapTitleType(String titleType) {
+   TitleType mapTitleType(String titleType) {
     if (titleType == "WC") {
       return TitleType.WebComic;
     }

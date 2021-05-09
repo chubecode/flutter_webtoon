@@ -7,9 +7,17 @@ class DeeplinkNavigator {
       print("gotoDeeplink $deeplink");
       Navigator.of(context).popUntil(ModalRoute.withName('/'));
       if (deeplink.startsWith("deeplink://webcomic")) {
-        Navigator.of(context).pushNamed(TitleDetailScreen.screenName);
+        var uri = Uri.parse(deeplink);
+        String? titleId = uri.queryParameters["id"];
+        if(titleId != null) {
+          Navigator.of(context).pushNamed(
+            TitleDetailScreen.screenName,
+            arguments: TitleDetailScreenArguments(
+              titleId: titleId,
+            ),
+          );
+        }
       }
     }
   }
 }
-
