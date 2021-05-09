@@ -1,3 +1,4 @@
+import 'package:flutter_webtoon/common/exception/failure.dart';
 import "package:flutter_webtoon/domain/either.dart";
 import 'package:flutter_webtoon/domain/entity/title_detail/title_detail_entity.dart';
 import 'package:flutter_webtoon/domain/repositories/title_repository.dart';
@@ -8,7 +9,7 @@ class GetTitleDetailUseCase
     extends BaseUseCase<GetTitleDetailUseCaseInput, TitleDetailEntity> {
   final TitleRepository _titleRepository = GetIt.instance.get();
   @override
-  Future<Either<Error, TitleDetailEntity>> executeInternal(
+  Future<Either<Failure, TitleDetailEntity>> executeInternal(
       GetTitleDetailUseCaseInput input) async {
     return await _titleRepository.getTitleDetail(input.titleId);
   }

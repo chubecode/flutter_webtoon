@@ -4,25 +4,25 @@ import 'package:flutter_webtoon/domain/entity/title_detail/title_detail_entity.d
 import 'package:flutter_webtoon/common/extension/extension.dart';
 
 class TitleDetailMapper {
-  TitleDetailEntity map(TitleDetailResponse response) {
+  TitleDetailEntity map(TitleDetailResponse? response) {
     return TitleDetailEntity(
-      author: response.author.defaultEmpty(),
-      avgReviewScore: response.avgReviewScore.defaultZero(),
-      chapters: mapChapters(response.chapters),
-      description: response.description.defaultEmpty(),
-      id: response.id.defaultEmpty(),
-      name: response.name.defaultEmpty(),
-      numChapter: response.numChapter.defaultZero(),
-      numComment: response.numComment.defaultZero(),
-      numLike: response.numLike.defaultZero(),
-      numRead: response.numRead.defaultZero(),
-      numReview: response.numReview.defaultZero(),
-      readStatus: mapReadStatus(response.readStatus.defaultEmpty()),
-      releaseDate: response.releaseDate.defaultEmpty().parseDateApi(),
-      status: mapStatus(response.status.defaultEmpty()),
-      thumbDetailUrl: response.thumbDetailUrl.defaultEmpty(),
-      thumbVerticalUrl: response.thumbVerticalUrl.defaultEmpty(),
-      titleType: mapTitleType(response.titleType.defaultEmpty()),
+      author: (response?.author).defaultEmpty(),
+      avgReviewScore: (response?.avgReviewScore).defaultZero(),
+      chapters: mapChapters(response?.chapters),
+      description: (response?.description).defaultEmpty(),
+      id: (response?.id).defaultEmpty(),
+      name: (response?.name).defaultEmpty(),
+      numChapter: (response?.numChapter).defaultZero(),
+      numComment: (response?.numComment).defaultZero(),
+      numLike: (response?.numLike).defaultZero(),
+      numRead: (response?.numRead).defaultZero(),
+      numReview: (response?.numReview).defaultZero(),
+      readStatus: mapReadStatus((response?.readStatus).defaultEmpty()),
+      releaseDate: (response?.releaseDate).defaultEmpty().parseDateApi(),
+      status: mapStatus((response?.status).defaultEmpty()),
+      thumbDetailUrl: (response?.thumbDetailUrl).defaultEmpty(),
+      thumbVerticalUrl: (response?.thumbVerticalUrl).defaultEmpty(),
+      titleType: mapTitleType((response?.titleType).defaultEmpty()),
     );
   }
 

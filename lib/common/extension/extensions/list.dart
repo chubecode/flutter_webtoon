@@ -1,4 +1,4 @@
-extension ListNullUtils on List<dynamic>? {
-  List<dynamic> defaultEmpty() => defaultIfNull(List.empty());
-  List<dynamic> defaultIfNull(List defaultValue) => this ?? defaultValue;
+extension ListNullUtils <T> on List<T>? {
+  List<T> defaultEmpty() => defaultIfNull(List.empty());
+  List<T> defaultIfNull(List<T> defaultValue) => this ?? defaultValue;
 }

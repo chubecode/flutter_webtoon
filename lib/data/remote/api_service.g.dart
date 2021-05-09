@@ -16,17 +16,17 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<WebComicResponse> getWebComic() async {
+  Future<WebComicResult> getWebComic() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<WebComicResponse>(
+        _setStreamType<WebComicResult>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/webtoon_api/home/webcomic',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = WebComicResponse.fromJson(_result.data!);
+    final value = WebComicResult.fromJson(_result.data!);
     return value;
   }
 

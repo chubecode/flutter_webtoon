@@ -21,7 +21,7 @@ class TitleDetailScreen extends StatelessWidget {
     final String? titleId = args?.titleId;
 
     if(titleId == null) {
-      return _renderBlocStateChange(context, ErrorState(), titleId.defaultEmpty());
+      return Scaffold(body: _renderBlocStateChange(context, ErrorState(), titleId.defaultEmpty()));
     } else {
       return BlocProvider<TitledetailBloc>(
         create: (context) {
