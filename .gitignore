@@ -44,5 +44,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/lib/data/remote/api_service.g.dart
+/lib/data/remote/entities/webcomic/web_comic_response.g.dart
+/lib/data/remote/entities/webcomic/title_response.g.dart
+/lib/data/remote/entities/webcomic/section_response.g.dart
 
 pubspec.lock

@@ -1,13 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dart_extensions/dart_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webtoon/common/common_widgets.dart';
-import 'package:flutter_webtoon/common/extension/extension.dart';
 import 'package:flutter_webtoon/domain/entity/section_entity.dart';
-import 'package:flutter_webtoon/domain/entity/title_entity.dart';
+import 'package:flutter_webtoon/domain/entity/section_item_entity.dart';
 import 'package:flutter_webtoon/features/webcomic/web_comic_bloc.dart';
 import 'package:flutter_webtoon/features/webcomic/webtoon_action.dart';
 import 'package:flutter_webtoon/features/webcomic/webtoon_list.dart';
@@ -52,8 +47,9 @@ class WebComicScreen extends StatelessWidget {
 
   Widget _renderSuccessState(WebComicSuccess state) {
     List<SectionEntity> sections = state.sections;
-    List<TitleEntity> sliderSections = state.sliderSections.first.items;
-    List<TitleEntity> actionSections = state.actionbarSections.first.items;
+    List<SectionItemEntity> sliderSections = state.rankingSections.first.items;
+    List<SectionItemEntity> actionSections =
+        state.actionbarSections.first.items;
     return ListView(
       children: [
         WebtoonSlider(sliderSections: sliderSections),
@@ -65,6 +61,3 @@ class WebComicScreen extends StatelessWidget {
     );
   }
 }
-
-
-

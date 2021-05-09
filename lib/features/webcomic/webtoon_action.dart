@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 import 'package:dart_extensions/dart_extensions.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_webtoon/common/extension/extension.dart';
-import 'package:flutter_webtoon/domain/entity/title_entity.dart';
-
+import 'package:flutter_webtoon/domain/entity/section_item_entity.dart';
 
 class WebtoonAction extends StatelessWidget {
   const WebtoonAction({
@@ -11,7 +10,7 @@ class WebtoonAction extends StatelessWidget {
     required this.actionSections,
   }) : super(key: key);
 
-  final List<TitleEntity> actionSections;
+  final List<SectionItemEntity> actionSections;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +24,12 @@ class WebtoonAction extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CachedNetworkImage(
                 width: 40,
                 height: 40,
-                imageUrl:
-                "http://webtoon.tinyflutterteam.com/static/" +
+                imageUrl: "http://webtoon.tinyflutterteam.com/static/" +
                     actionSections[index].thumb.defaultEmpty(),
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
@@ -45,8 +43,7 @@ class WebtoonAction extends StatelessWidget {
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-              Expanded(
-                  child: Text(actionSections[index].name.defaultEmpty())),
+              Expanded(child: Text(actionSections[index].name.defaultEmpty())),
             ],
           ).toCenter();
         },
