@@ -1,28 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:dart_extensions/dart_extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_webtoon/domain/entity/title_detail/title_detail_entity.dart';
+import 'package:flutter_webtoon/features/title_detail/bloc/bloc/titledetail_bloc.dart';
+import 'package:flutter_webtoon/common/common_widgets.dart';
+import 'package:flutter_webtoon/common/extension/extension.dart';
+
+class TitleDetailScreenArguments {
+  final String titleId;
+
+  TitleDetailScreenArguments({required this.titleId});
+}
 
 class TitleDetailScreen extends StatelessWidget {
   static final screenName = "/titledetail";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          _buildHeaderImage(context),
-        ],
-      ),
-    );
+    final TitleDetailScreenArguments? args = ModalRoute.of(context)?.settings.arguments.asOrNull<TitleDetailScreenArguments>();
+    final String? titleId = args?.titleId;
+
+    if(titleId == null) {
+      return _renderBlocStateChange(context, ErrorState(), titleId.defaultEmpty());
+    } else {
+      return BlocProvider<TitledetailBloc>(
+        create: (context) {
+          return TitledetailBloc()
+            ..add(RequestTitleEvent(titleId: titleId));
+        },
+        child: Scaffold(
+          body: BlocBuilder<TitledetailBloc, TitledetailState>(
+            builder: (BuildContext context, TitledetailState state) {
+              return _renderBlocStateChange(context, state, titleId);
+            },
+          ),
+        ),
+      );
+    }
   }
 
-  Container _buildHeaderImage(BuildContext context) {
+  Container _buildHeaderImage(BuildContext context, TitleDetailEntity titleDetail) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           Image.network(
-            "https://picsum.photos/300/300",
+            titleDetail.thumbDetailUrl,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.width,
             fit: BoxFit.fill,
@@ -50,6 +74,46 @@ class TitleDetailScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _renderBlocStateChange(BuildContext context, TitledetailState state, String titleId) {
+    if(state is LoadingState) {
+      return Container(
+        color: Colors.white,
+        child: loadingWidget(),
+      );
+    } else if(state is SuccessState) {
+      List<Widget> chapters = _buildChapters(state.titleDetail);
+      return ListView(
+        children: [
+          _buildHeaderImage(context, state.titleDetail),
+        ]..addAll(chapters),
+      );
+    } else {
+      return Container(
+        color: Colors.white,
+        child: errorWidget(onRetryClicked: (context) => {
+          BlocProvider.of<TitledetailBloc>(context).add(RequestTitleEvent(titleId: titleId))
+        },),
+      );
+    }
+  }
+
+  List<Widget> _buildChapters(TitleDetailEntity titleDetail) {
+    return titleDetail.chapters.mapList((chapter) => _buildChapter(chapter));
+  }
+
+  Widget _buildChapter(ChapterEntity chapter) {
+    return ListTile(
+      leading: Icon(Icons.add),
+      title: Text(chapter.name, textScaleFactor: 1.5,),
+      trailing: Icon(Icons.done),
+      subtitle: Text('${chapter.numRead.format()} read, ${chapter.numLike.format()} like, ${chapter.numComment.format()} comment'),
+      selected: true,
+      onTap: () {
+        //TODO go to Chapter detail
+      },
     );
   }
 }
@@ -109,6 +173,7 @@ class TitleDetailScreen extends StatelessWidget {
 
 class TitleDetailScreenScroll extends StatelessWidget {
   static final screenName = "/titledetail";
+
   TitleDetailScreenScroll({Key? key}) : super(key: key);
 
   @override

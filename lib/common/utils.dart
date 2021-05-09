@@ -9,6 +9,10 @@ String formatNumber(int number) {
   return _numberFormat.format(number);
 }
 
+String formatNumberDouble(double number) {
+  return _numberFormat.format(number);
+}
+
 String formatMoney(double money) {
   return _moneyNumberFormat.format(money);
 }
