@@ -40,7 +40,6 @@ class WebtoonAction extends StatelessWidget {
                             Colors.white, BlendMode.colorBurn)),
                   ),
                 ),
-                placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
               Expanded(child: Text(actionSections[index].name.defaultEmpty())),

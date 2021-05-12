@@ -30,7 +30,6 @@ class WebtoonSlider extends StatelessWidget {
                       ColorFilter.mode(Colors.white, BlendMode.colorBurn)),
             ),
           ),
-          placeholder: (context, url) => CircularProgressIndicator(),
           errorWidget: (context, url, error) =>
               Image(image: AssetImage('assets/images/header_drawer.png')),
         ),
