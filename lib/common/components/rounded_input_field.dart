@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'text_field_container.dart';
+import 'package:dart_extensions/dart_extensions.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
@@ -40,10 +41,10 @@ class RoundedInputField extends StatelessWidget {
             hintStyle: TextStyle(color: hintTextColor),
             suffixIcon: Icon(
               icon,
-              color: Colors.grey,
+              color: Colors.yellow,
             ),
             border: InputBorder.none),
       ),
-    );
+    ).toCenter();
   }
 }

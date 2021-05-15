@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dart_extensions/dart_extensions.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
@@ -27,6 +28,6 @@ class TextFieldContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: child,
-    );
+    ).toCenter();
   }
 }
