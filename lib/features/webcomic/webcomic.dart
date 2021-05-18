@@ -47,6 +47,7 @@ class WebComicScreen extends StatelessWidget {
 
   Widget _renderSuccessState(WebComicSuccess state) {
     List<SectionEntity> sections = state.sections;
+    List<SectionEntity> rankings = state.rankingSections;
     List<SectionItemEntity> sliderSections = state.rankingSections.first.items;
     List<SectionItemEntity> actionSections =
         state.actionbarSections.first.items;
@@ -55,7 +56,12 @@ class WebComicScreen extends StatelessWidget {
         WebtoonSlider(sliderSections: sliderSections),
         WebtoonAction(actionSections: actionSections),
         Expanded(
-          child: WebtoonList(sections: sections),
+          child: Column(
+            children: [
+              WebtoonList(sections: rankings),
+              WebtoonList(sections: sections),
+            ],
+          ),
         ),
       ],
     );
